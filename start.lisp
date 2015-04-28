@@ -1,0 +1,1 @@
+(ql:quickload "trivial-shell")
