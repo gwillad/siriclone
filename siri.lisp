@@ -9,11 +9,21 @@
   (concatenate 'string stringA stringB)
 )
 
+(defun parse-to-google (q)
+  (if (string= (subseq q 0 6) "google")
+      T
+    nil)
+)
+
 (defun initiate-siri ()
   (print-line "Hello how may I help you?")
   (setq query "initial")
   (loop while (not (equal query "exit")) do
-	 (setq query (read-line))
-	 (trivial-shell:shell-command (concat "python search.py " query))
+	(setq query (string-downcase(read-line)))
+	;; handle a simple google <x> request
+	(if (parse-to-google query)
+	 (trivial-shell:shell-command (concat "python search.py " query)))
+	 
+
   )
 )
