@@ -1,5 +1,5 @@
-;(load "/opt/lisp/quicklisp.lisp")
-;(quicklisp-quickstart:install)
-;(ql:add-to-init-file)
 (ql:quickload "trivial-shell")
-(trivial-shell:shell-command "python2.7")
+(load "auxfns.lisp")
+(load "siri.lisp")
+(initiate-siri)
+
