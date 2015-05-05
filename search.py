@@ -2,8 +2,23 @@ import urllib
 import simplejson
 import sys
 from subprocess import call
+from HTMLParser import HTMLParser
 
 enumeration_strings = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eigth", "ninth", "tenth"]
+
+class MLStripper(HTMLParser):
+    def __init__(self):
+        self.reset()
+        self.fed = []
+    def handle_data(self, d):
+        self.fed.append(d)
+    def get_data(self):
+        return ''.join(self.fed)
+
+def strip_tags(html):
+    s = MLStripper()
+    s.feed(html)
+    return s.get_data()
 
 def format_lisp_query(lst):
   result = ""
@@ -28,8 +43,10 @@ i=0
 for result in results:
   print "The " + enumeration_strings[i] + " result I have gathered for you is:"
   i = i+1
-  print result['title'] + " : " + result['url']
-  answer = raw_input("If you would like to visit this URL please type 'yes' (any other entry for no): ")
+  print strip_tags(result['title']) + " : " + result['url']
+  answer = raw_input("If you would like to visit this URL please type 'yes' (any other entry for no or none to quit): ")
   if answer == "yes":
     call(["firefox", result['url']])
+  elif answer == "none":
+    exit(0)
   
