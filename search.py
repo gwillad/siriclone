@@ -32,7 +32,6 @@ def format_lisp_query(lst):
 query = sys.argv[2:] # eliminate "google"
 query = format_lisp_query(query)
 query = urllib.urlencode({'q':query})
-print query
 url = 'http://ajax.googleapis.com/ajax/services/search/web?v=1.0&%s' % (query)
 search_results = urllib.urlopen(url)
 
