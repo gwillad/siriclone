@@ -25,6 +25,5 @@
 	(if (parse-to-google query)
 	 (trivial-shell:shell-command (concat "python search.py " query)))
 	 
-
   )
 )
