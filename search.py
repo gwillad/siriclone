@@ -3,6 +3,7 @@ import simplejson
 import sys
 from subprocess import call
 from HTMLParser import HTMLParser
+import nltk
 
 enumeration_strings = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eigth", "ninth", "tenth"]
 
@@ -36,6 +37,11 @@ url = 'http://ajax.googleapis.com/ajax/services/search/web?v=1.0&%s' % (query)
 search_results = urllib.urlopen(url)
 
 json = simplejson.loads(search_results.read())
+print json
+
+
+exit(0)
+
 results = json['responseData']['results']
 
 i=0
