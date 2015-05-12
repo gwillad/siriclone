@@ -8,21 +8,29 @@
 
 ;; New version of pat-match with segment variables
 
+;; modified by Casey Collins and Adam Gwilliam
 
-(setq memory '((your family)))
+
+(setq memory '((the dark side)))
 (setq full-input nil)
-(setq synonyms-lists '((dreamt imagined fantasized bloop)))
+(setq synonyms-lists '((dreamt imagined fantasized) 
+		       (patience patient) 
+		       (everyone everybody always) 
+		       (computer machine) 
+		       (name title)
+		       (apologize sorry)
+		       (remember recall)
+		       (scared afraid fear terror terrified)
+		       (try attempt)
+		       (mother mom mommy father dad family brother sister uncle aunt cousin children kid child)))
 
 (defun filter-mem (list) 
   ;; makes sure only useful things are in the list. 
-  ;; swag
-;  (princ (car list)) (terpri)
-;  (princ full-input) (terpri)
   (cond ((not list) 
 	 '())
-	((equal (car list) full-input) 
+	((equal (car list) full-input) ;;we skip the full input
 	 (filter-mem (cdr list)))
-	((equal (car list) nil)
+	((equal (car list) nil) ;; and nil values
 	 (filter-mem (cdr list)))
 	(t (cons (car list) (filter-mem (cdr list))))))
 
@@ -32,15 +40,14 @@
 
 
 (defun synonym-p (pattern input)
-  (cond ((equal pattern input) t)
-	;((and (atom pattern) (atom input))
-	 ;nil)
-	
-	((same-synonym-list pattern input synonyms-lists) t)))
+  (cond ((equal pattern input) t) ;; they are synonyms if they are the same work
+	((same-synonym-list pattern input synonyms-lists) t))) ;; or if they are in the same synonym list
   
 (defun same-synonym-list (pattern input synonyms)
-  (cond ((null synonyms) nil)
-	((and (find pattern (car synonyms)) (find input (car synonyms))) t)
+  (cond ((null synonyms) nil) 
+	;; if both are in the same synonym list, return t
+	((and (find pattern (car synonyms)) (find input (car synonyms))) t) 
+	;; otherwise, recurse
 	(t (same-synonym-list pattern input (cdr synonyms)))))
 
 (defun pat-match (pattern input &optional (bindings no-bindings))
@@ -186,27 +193,6 @@
 (defun random-elt (choices)
   "Choose an element from a list at random."
   (elt choices (random (length choices))))
-
-;;; ==============================
-
-;;;> (eliza)
-;;;ELIZA> (hello there)
-;;;(HOW DO YOU DO. PLEASE STATE YOUR PROBLEM.) 
-;;;ELIZA> (i want to test this program)
-;;;(WHAT WOULD IT MEAN IF YOU GOT TO TEST THIS PROGRAM) 
-;;;ELIZA> (i could see if it works)
-;;;(DO YOU REALLY THINK ITS LIKELY THAT IT WORKS)
-;;;ELIZA> (no not really)
-;;;(ARE YOU SAYING "NO" JUST TO BE NEGATIVE?) 
-;;;ELIZA> (no)
-;;;(ARE YOU SAYING "NO" JUST TO BE NEGATIVE?) 
-;;;ELIZA> (forget it-- i was wondering how general the program is)
-;;;(WHY DO YOU TELL ME YOU WERE WONDERING HOW GENERAL THE PROGRAM IS NOW?)
-;;;ELIZA> (i felt like it)
-;;;(WHAT OTHER FEELINGS DO YOU HAVE?) 
-;;;ELIZA> (i feel this is enough)
-;;;(DO YOU OFTEN FEEL THIS IS ENOUGH ?) 
-;;;ELIZA> [Abort]
 
 ;;; ==============================
 
