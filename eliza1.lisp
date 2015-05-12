@@ -155,7 +155,7 @@
               (if (not (eq result fail))
                   (sublis (switch-viewpoint result)
                           (random-elt (rule-responses rule))))))
-        *siri-rules*)))
+        *eliza-rules*)))
     ; if it failed to match, grab something else from random from memory to chat about
     (if (equal response '(fail))
 	(append '(tell me more about) (switch-viewpoint (random-elt memory)))
