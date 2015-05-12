@@ -60,4 +60,5 @@
      (gen_response Greetings. My name is Siri. What can I do for you ))
     (((?* ?a) weather in (?* ?x)) (api_weather ?x))
     (((?* ?a) weather like in (?* ?x)) (api_weather ?x))
+    (((?* ?a) weather like in (?* ?x)) (api_weather ?x))
     (((?* ?x)) (fail)))) ;; failure case. allows us to know we failed
