@@ -38,14 +38,22 @@ if len(argv) <= 2: #just wants current weather
     print "It's currently " + weather_com_result['current_conditions']['text'] + " in " + loc_name + " with a temperature of " \
         + weather_com_result['current_conditions']['temperature'] + "C.", 
     if (weather_com_result['current_conditions']['temperature'] != weather_com_result['current_conditions']['feels_like']):
-        print "But it feels a little more like " + weather_com_result['current_conditions']['feels_like'] + ". "
+        print "But it feels a little more like " + weather_com_result['current_conditions']['feels_like'] + "C. "
     
 
     forecast = raw_input("Do you want to see the forecast for today? ")
     if (forecast == "y" or forecast == "Y" or forecast == "Yes" or forecast == "yes"):
-        print "Okay! Today it will be " + weather_com_result['forecasts'][0]['day']['text'] + \
-            getChanceOfPrecip(weather_com_result['forecasts'][0]['day']['chance_precip']) + ". Tonight it will be " + \
-            weather_com_result['forecasts'][0]['night']['text'] + getChanceOfPrecip(weather_com_result['forecasts'][0]['night']['chance_precip']) + ". "
+        print "Okay! "
+        if weather_com_result['forecasts'][0]['day']['text'] != "":
+            print "Today it will be " \
+                + weather_com_result['forecasts'][0]['day']['text'] \
+                + getChanceOfPrecip(weather_com_result['forecasts'][0]['day']['chance_precip']) \
+                + ". "
+        if weather_com_result['forecasts'][0]['night']['text'] != "":
+            print "Tonight it will be " \
+                + weather_com_result['forecasts'][0]['night']['text'] \
+                + getChanceOfPrecip(weather_com_result['forecasts'][0]['night']['chance_precip']) \
+                + ". "
 
 
 # else: #forecast
