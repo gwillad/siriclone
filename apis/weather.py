@@ -2,6 +2,7 @@ import pywapi
 import pprint
 from sys import argv
 
+
 def getChanceOfPrecip(u_odds):
     odds = int(u_odds)
     if odds <= 10:
