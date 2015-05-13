@@ -14,6 +14,7 @@
 
 (defun read-line-no-punct ()
   "Read an input line, ignoring punctuation."
+  ;; ERROR: reduces fractions, making dates like 5/15 impossible. 
   (read-from-string
     (concatenate 'string "(" (substitute-if #\space #'punctuation-p
                                             (read-line))
@@ -38,9 +39,7 @@
     (print 'siri>)
     (let* ((input (read-line-no-punct))
            (response (flatten (use-eliza-rules input))))
-
       (if (equal (first response) 'api_weather) (trivial-shell:shell-command (concat-all  "python apis/weather.py" (cdr response))))
-      ;; TODO (if (equal (first response) '(gen_response)) (print-all (cdr response)))
       (if (equal (first response) 'tell_joke) (trivial-shell:shell-command "python apis/reddit.py"))
       (if (equal (first response) 'gen_response) (print-with-spaces (cdr response)))
       (if (equal (first response) 'nothing_matched) (trivial-shell:shell-command (concat-all "python apis/wolfram/wolfram_questions.py" input)))

@@ -9,36 +9,53 @@
 
 from __future__ import unicode_literals
 
+import urllib
+import simplejson
+import sys
+from subprocess import call
+
+
 import pytest
 import random
 import wolframalpha
+from sys import argv
+
+
 
 app_id = 'Q59EW4-7K8AHE858R'
 "App ID for testing this project. Please don't use for other apps."
 
-answer_leads = ["The answer you are looking for is ", "I think you wanted ", "You were looking for "]
+answer_leads = ["The answer you are looking for is ", "I think you wanted to find ", "Hi, I'm pretty sure you were looking for ", "Your answer is "]
 
-def test_basic():
-	client = wolframalpha.Client(app_id)
-	res = client.query('30 deg C in deg F')
-        print res
-	assert len(res.pods) > 0
-	results = list(res.results)
-	assert results[0].text == '86 °F  (degrees Fahrenheit)'
-	print results[0].text
-
-def test_invalid_app_id():
-	client = wolframalpha.Client('abcdefg')
-	with pytest.raises(Exception):
-		client.query('30 deg C in deg F')
-
+arithmetic_leads = ["The answer to problem you asked is ", "The solution to your arithmetic query is "]
 
 client = wolframalpha.Client(app_id)
-query_wolf = raw_input()
-res = client.query(query_wolf)
-results = list(res.results)
 
-if len(results) != 0:
-    print random.choice(answer_leads) + results[0].text
+def google_api(query):
+    call(["python2.7", "../search.py", "google", query])
+
+
+def arithmetic_query(query):
+    res = client.query(query_wolf)
+    results = list(res.results)
+    if len(res.pods) > 0:
+        print random.choice(arithmetic_leads) + results[0].text
+    else:
+        print "I can't find anything on what you are looking for right now. Let me try and find some web pages that may help you"
+        google_api(query)
+
+def normal_query(query):
+    res = client.query(query_wolf)
+    results = list(res.results)
+    if len(res.pods) > 0:
+        print random.choice(answer_leads) + results[0].text
+    else:
+        print "I can't find anything on what you are looking for right now. Let me try and find some web pages that may help you"
+        google_api(query)
+    
+query_wolf = " ".join(argv[1:])
+
+if any((c in "=-/*^") for c in query_wolf):
+    arithmetic_query(query_wolf)
 else:
-    print "I can't find anything on what you are looking for right now. Let me try and find some web pages that may help you"
+    normal_query(query_wolf)
