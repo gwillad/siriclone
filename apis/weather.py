@@ -14,6 +14,8 @@ def getChanceOfPrecip(u_odds):
         return "with a good chance for precipitation"
     return ", and you can count on precipitation"
 
+phrase = argv[1:]
+
 print argv
 
 

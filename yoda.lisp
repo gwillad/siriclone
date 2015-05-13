@@ -63,7 +63,5 @@
 (defparameter *eliza-rules*
   '((((?* ?x) hello (?* ?y))      
      (gen_response Greetings. My name is Siri. What can I do for you ))
-    (((?* ?a) weather in (?* ?x)) (api_weather ?x))
-    (((?* ?a) weather like in (?* ?x)) (api_weather ?x))
-    (((?* ?a) weather like in (?* ?x)) (api_weather ?x))
+    (((?* ?a) weather (?* ?x)) (api_weather ?x))
     (((?* ?x)) (nothing_matched)))) ;; failure case. allows us to know we failed
