@@ -42,6 +42,10 @@
       (if (equal (first response) 'api_weather) (trivial-shell:shell-command (concat-all  "python apis/weather.py" (cdr response))))
       (if (equal (first response) 'gen_response) (print-with-spaces (cdr response)))
       (if (equal (first response) 'nothing_matched) (trivial-shell:shell-command (concat-all "python apis/wolfram/wolfram_questions.py" input)))
+      (if (equal (first response) 'add) (trivial-shell:shell-command (concat-all "python2.7 apis/contacts/contacts.py" response)))
+      (if (equal (first response) 'call) (trivial-shell:shell-command (concat-all "python2.7 apis/contacts/contacts.py" response)))
+      (if (equal (first response) 'text) (trivial-shell:shell-command (concat-all "python2.7 apis/contacts/contacts.py" response)))
+      (if (equal (first response) 'email) (trivial-shell:shell-command (concat-all "python2.7 apis/contacts/contacts.py" response)))
       (if (equal (first response) 'exit_siri) (RETURN)))))
 
 
@@ -64,4 +68,17 @@
      (gen_response Greetings. My name is Siri. What can I do for you ))
     (((?* ?a) weather (?* ?x)) (api_weather ?x))
     ((exit) (exit_siri))
+    ((Add (?* ?x) to my contacts) (add ?x))
+    ((Add contact) (add))
+    ((add) (add))
+    ((Add (?* ?x)) (add ?x))
+    ((Add contact (?* ?x)) (add ?x))
+    (((?* ?y) Call (?* ?x)) (call ?x))
+    (((?* ?y) text (?* ?x)) (text ?x))
+    (((?* ?y) email (?* ?x)) (email ?x))
+    (((?* ?y) view (?* ?x)) (view ?x))
+    ((Call (?* ?x)) (call ?x))
+    ((text (?* ?x)) (text ?x))
+    ((email (?* ?x)) (email ?x))
+    ((view (?* ?x)) (view ?x))
     (((?* ?x)) (nothing_matched)))) ;; failure case. allows us to know we failed

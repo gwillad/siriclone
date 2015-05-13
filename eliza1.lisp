@@ -22,6 +22,7 @@
 		       (remember recall)
 		       (scared afraid fear terror terrified)
 		       (try attempt)
+		       (add save store record)
 		       (mother mom mommy father dad family brother sister uncle aunt cousin children kid child)))
 
 (defun filter-mem (list) 
