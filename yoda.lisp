@@ -29,7 +29,7 @@
 
 (defun concat-all (str lst)
   (if (null lst) str
-  (concat-all (concat str (concat " " (string (car lst)))) (cdr lst)))
+  (concat-all (concat str (concat " " (write-to-string (car lst)))) (cdr lst)))
 )
 
 (defun siri ()
@@ -63,8 +63,6 @@
 (defparameter *eliza-rules*
   '((((?* ?x) hello (?* ?y))      
      (gen_response Greetings. My name is Siri. What can I do for you ))
-    (((?* ?a) weather in (?* ?x)) (api_weather ?x))
-    (((?* ?a) weather like in (?* ?x)) (api_weather ?x))
-    (((?* ?a) weather like in (?* ?x)) (api_weather ?x))    
+    (((?* ?a) weather (?* ?x)) (api_weather ?x))
     ((exit) (exit_siri))
     (((?* ?x)) (nothing_matched)))) ;; failure case. allows us to know we failed
