@@ -16,8 +16,27 @@ def getChanceOfPrecip(u_odds):
 
 phrase = argv[1:]
 
-print argv
+locale = "CLINTON, NY"
+day = "TODAY"
 
+for i in range(len(phrase)): 
+    if phrase[i] == "IN":
+        #next word[s] will be a location
+        locale = phrase[i+1]
+    elif phrase[i] == "ON":
+        if phrase[i+1] in ['JANUUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVERMBER', 'DECEMBER']:
+            day = " ".join(phrase[i+1:i+3])
+        else: 
+            day = phrase[i+1]
+    elif phrase[i] in ['JANUUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVERMBER', 'DECEMBER']:
+        day = " ".join(phrase[i:i+2])
+    elif re.match("\d?\d\/\d?\d", phrase[i]):
+        day = phrase[i]
+    elif phrase[i] in ['TODAY', 'TOMORROW', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY']:
+        day = phrase[i]
+
+print locale
+print day
 
 # months = { '1': "january",
 #            '2': "february",
