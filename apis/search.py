@@ -48,9 +48,11 @@ for result in results:
   print "The " + enumeration_strings[i] + " result I have gathered for you is:"
   i = i+1
   print strip_tags(result['title']) + " : " + result['url']
-  answer = raw_input("If you would like to visit this URL please type 'yes' (any other entry for no or none to quit): ")
+  answer = raw_input("If you would like I could bring you to this URL (yes, no): ")
   if answer == "yes":
     call(["firefox", result['url']])
   elif answer == "none":
     exit(0)
+  elif answer == "exit":
+      exit(0)
   
