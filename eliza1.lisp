@@ -178,7 +178,7 @@
 
 (defun flatten (the-list)
   "Append together elements (or lists) in the list."
-c  (mappend #'mklist the-list))
+  (mappend #'mklist the-list))
 
 (defun mklist (x)
   "Return x if it is a list, otherwise (x)."
