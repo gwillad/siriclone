@@ -43,8 +43,8 @@
       ;; TODO (if (equal (first response) '(gen_response)) (print-all (cdr response)))
       (if (equal (first response) 'gen_response) (print-with-spaces (cdr response)))
       (if (equal (first response) 'nothing_matched) (trivial-shell:shell-command (concat-all "python apis/wolfram/wolfram_questions.py" input)))
-      
-      (if (equal response '(good bye)) (RETURN)))))
+      (if (equal (first response) 'exit_siri) (RETURN)))))
+
 
 (defun print-with-spaces (list)
   (mapc #'(lambda (x) (prin1 x) (princ " ")) list))
@@ -64,4 +64,5 @@
   '((((?* ?x) hello (?* ?y))      
      (gen_response Greetings. My name is Siri. What can I do for you ))
     (((?* ?a) weather (?* ?x)) (api_weather ?x))
+    ((exit) (exit_siri))
     (((?* ?x)) (nothing_matched)))) ;; failure case. allows us to know we failed
