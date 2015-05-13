@@ -29,7 +29,7 @@
 
 (defun concat-all (str lst)
   (if (null lst) str
-  (concat-all (concat str (concat " " (string (car lst)))) (cdr lst)))
+  (concat-all (concat str (concat " " (write-to-string (car lst)))) (cdr lst)))
 )
 
 (defun siri ()
