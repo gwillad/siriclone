@@ -27,6 +27,11 @@
   (concatenate 'string stringA stringB)
 )
 
+(defun concat-all (str lst)
+  (if (null lst) str
+  (concat-all (concat str (concat " " (string (car lst)))) (cdr lst)))
+)
+
 (defun siri ()
   "Respond to user input using pattern matching rules."
   (loop
@@ -34,10 +39,10 @@
     (let* ((input (read-line-no-punct))
            (response (flatten (use-eliza-rules input))))
 
-      (if (equal (first response) 'api_weather) (trivial-shell:shell-command (concat "python apis/weather.py " (string (second response)))))
+      (if (equal (first response) 'api_weather) (trivial-shell:shell-command (concat-all  "python apis/weather.py" (cdr response))))
       ;; TODO (if (equal (first response) '(gen_response)) (print-all (cdr response)))
       (if (equal (first response) 'gen_response) (print-with-spaces (cdr response)))
-      (if (equal (first response) '(fail)) (princ "I am sorry can you repeat that?"))
+      (if (equal (first response) 'nothing_matched) (trivial-shell:shell-command (concat-all "python apis/wolfram/wolfram_questions.py" input)))
       
       (if (equal response '(good bye)) (RETURN)))))
 
@@ -60,4 +65,5 @@
      (gen_response Greetings. My name is Siri. What can I do for you ))
     (((?* ?a) weather in (?* ?x)) (api_weather ?x))
     (((?* ?a) weather like in (?* ?x)) (api_weather ?x))
-    (((?* ?x)) (fail)))) ;; failure case. allows us to know we failed
+    (((?* ?a) weather like in (?* ?x)) (api_weather ?x))
+    (((?* ?x)) (nothing_matched)))) ;; failure case. allows us to know we failed
