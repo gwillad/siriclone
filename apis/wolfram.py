@@ -15,6 +15,7 @@ def test_basic():
 	assert len(res.pods) > 0
 	results = list(res.results)
 	assert results[0].text == '86 °F  (degrees Fahrenheit)'
+	print 22
 
 def test_invalid_app_id():
 	client = wolframalpha.Client('abcdefg')
