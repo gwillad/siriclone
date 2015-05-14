@@ -21,10 +21,12 @@ day = "TODAY"
 
 months = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER']
 
+
 for i in range(len(phrase)): 
     if phrase[i] == "IN":
         #next word[s] will be a location
-        locale = phrase[i+1]
+        if (phrase[i+1] != "CLINTON" or phrase[i+2] != "NY"): # clinton ny special case
+            locale = phrase[i+1]
     elif phrase[i] == "ON":
         if phrase[i+1] in months:
             day = " ".join(phrase[i+1:i+3])
@@ -54,7 +56,7 @@ loc_name = loc_id_list[ans][1]
 
 weather_com_result = pywapi.get_weather_from_weather_com(loc_id)
 
-if len(argv) <= 2 or argv[2].lower() == "today" or argv[2].lower() == "tonight" or argv[2].lower() == "now" or " ".join(argv[2:]).lower() == "right now" : #just wants current weather
+if len(argv) <= 2 or day == "TODAY" or day == "TONIGHT" or day == "NOW": # just wants current weather
     print "It's currently " + weather_com_result['current_conditions']['text'] + " in " + loc_name + " with a temperature of " \
         + weather_com_result['current_conditions']['temperature'] + "C.", 
     if (weather_com_result['current_conditions']['temperature'] != weather_com_result['current_conditions']['feels_like']):
