@@ -34,6 +34,64 @@ There will be a high of 25C and a low of 13C.
 In general, and combinations of these will work.
 
 
+**************************************
+SIRI> Add Zach Arnold to my contacts
+Please enter contact phone number: 6665554432 
+
+Please enter contact email: zarnold@hamilton.edu
+
+I have added Zach Arnold to your contacts!
+************************************
+
+SIRI> call Casey Collins
+
+Calling Casey Collins at 7817104318...
+If I was a phone I would place a call for you. Sadly, I am not
+
+*************************************
+
+SIRI> Text Casey Collins
+
+Texting Casey Collins at 7817104318...
+Check your phone. If you received a text from me, that would be crazy. I didn't send it.
+********************************************
+
+SIRI> email Casey Collins
+
+Emailing Casey Collins at chcollin@hamilton.edu...
+Unfortunately email is coming in version 2.0
+
+**********************************************
+
+SIRI> Who is the President of the United States?
+The answer you are looking for is Barack Obama
+
+SIRI> What is the capital of England?
+Your answer is London
+
+SIRI> 4 + 4
+The answer you are looking for is 8
+
+
+**************************************************** 
+
+SIRI> Red Sox
+ I can't find anything on what you are looking for right now. Let me try and find some web pages that may help you
+
+
+The first result I have gathered for you is:
+The Official Site of The Boston Red Sox | redsox.com: Homepage : http://boston.redsox.mlb.com/
+If you would like I could bring you to this URL (yes, no): The second result I have gathered for you is: no
+Red Sox Schedule | redsox.com: Schedule : http://boston.redsox.mlb.com/schedule/%3Fc_id%3Dbos
+If you would like I could bring you to this URL (yes, no): The third result I have gathered for you is: no 
+Boston Red Sox news, rumors and more | Bleacher Report : http://bleacherreport.com/boston-red-sox
+If you would like I could bring you to this URL (yes, no): exit
+
+!!!! Saying yes here would open a browser !!!!
+
+************************************************
+
+
 // you guys put your stuff here
 
 
