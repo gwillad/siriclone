@@ -67,7 +67,10 @@
 (defparameter *eliza-rules*
   '((((?* ?x) hello (?* ?y))      
      (gen_response Greetings. My name is Siri. What can I do for you ))
-    
+    (((?* ?x) hey (?* ?y))      
+     (gen_response Greetings. My name is Siri. What can I do for you ))
+     (((?* ?x) hi (?* ?y))      
+     (gen_response Greetings. My name is Siri. What can I do for you ))
     (((?* ?a) weather (?* ?x)) (api_weather ?x))
     ((exit) (exit_siri))
     ((Add (?* ?x) to my contacts) (add ?x))

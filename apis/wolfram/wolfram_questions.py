@@ -32,7 +32,7 @@ arithmetic_leads = ["The answer to problem you asked is ", "The solution to your
 client = wolframalpha.Client(app_id)
 
 def google_api(query):
-    call(["python2.7", "../search.py", "google", query])
+    call(["python2.7", "apis/search.py", "google", query])
 
 
 def arithmetic_query(query):
@@ -47,7 +47,8 @@ def arithmetic_query(query):
 def normal_query(query):
     res = client.query(query_wolf)
     results = list(res.results)
-    if len(res.pods) > 0:
+
+    if len(res.pods) > 0 and results != []:
         print random.choice(answer_leads) + results[0].text
     else:
         print "I can't find anything on what you are looking for right now. Let me try and find some web pages that may help you"

@@ -8,7 +8,7 @@ import sqlite3
 from sys import argv
 import sys
 
-db_siri = sqlite3.connect('siri.db')
+db_siri = sqlite3.connect('apis/contacts/siri.db')
 
 def dict_factory(cursor, row):
     d = {}
