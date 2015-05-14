@@ -16,7 +16,7 @@ def getChanceOfPrecip(u_odds):
 
 phrase = argv[1:]
 
-locale = "CLINTON, NY"
+locale = "13323"
 day = "TODAY"
 
 months = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER']
@@ -39,11 +39,12 @@ for i in range(len(phrase)):
     elif phrase[i] in ['TODAY', 'TOMORROW', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY']:
         day = phrase[i]
 
+
 loc_id_list = pywapi.get_loc_id_from_weather_com(locale)
 
 ans = 0
 
-if locale != "CLINTON, NY" and loc_id_list['count'] > 1:
+if locale != "13323" and loc_id_list['count'] > 1:
     for i in range(loc_id_list['count']):
         yn = raw_input("Did you mean, " + loc_id_list[i][1] + "? ")
         if re.match("[yY](es|)?", yn):
@@ -79,7 +80,7 @@ if len(argv) <= 2 or day == "TODAY" or day == "TONIGHT" or day == "NOW": # just 
 
 
 else: #forecast
-    day = argv[2].lower()
+    day = day.lower()
     forecast = None
     day_or_date = None
     if day in ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]:
@@ -89,7 +90,7 @@ else: #forecast
         if forecast == None:
             print "Sorry I don't have data that far in advance. "
     elif day == "tomorrow":
-        forecast = weather_com_results['forecasts'][1]
+        forecast = weather_com_result['forecasts'][1]
     else:
         month_name = re.compile("(january|february|march|april|may|june|july|august|september|october|november|december)\s+\d?\d")
         month_value = re.compile("\d?\d\/\d?\d")
@@ -97,8 +98,7 @@ else: #forecast
         if month_name.match(day):
             day = " ".join(day.split()[0:2]).strip(",")
         if month_value.match(day):
-            print day
-            day = " ".join([months[int(day.split("/")[0])], day.split("/")[1]]).strip(",")
+            day = " ".join([months[int(day.split("/")[0])-1].lower(), day.split("/")[1]]).strip(",")
         for f in weather_com_result['forecasts']:
             if f['date'].lower() == day:
                 forecast = f
@@ -109,16 +109,16 @@ else: #forecast
        
     if forecast != None:
         if forecast['day']['text'] != "":
-            print "The weather on " + day + " during the day will be " \
+            print "The weather " + ("on " if day!="tomorrow" else "") + day + " in " + loc_name + " during the day will be " \
                 + forecast['day']['text'] \
                 + getChanceOfPrecip(forecast['day']['chance_precip']) \
                 + ". "
         if forecast['night']['text'] != "":
-            print "The weather on " + day + " at night will be " \
+            print "The weather " + ("on " if day!="tomorrow" else "") + day + " in " + loc_name + " at night will be " \
                 + forecast['night']['text'] \
                 + getChanceOfPrecip(forecast['day']['chance_precip']) \
                 + ". "
         print "There will be a high of " \
             + forecast['high'] + "C and a low of " \
-            + forecast['low'] + ". "
+            + forecast['low'] + "C. "
 

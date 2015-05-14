@@ -1,0 +1,49 @@
+Query Examples - Zach Arnold, Casey Collins, Adam Gwilliam
+
+Our version of Siri can handle lots of different queries. Here are a couple
+examples: 
+
+Weather:########################################################################
+
+SIRI> whats the weather? 
+It's currently Sunny in Clinton, NY with a tempertature of 16C. Do you want to see the forecast for today? Yes
+Okay!
+Today it will be Sunny with a lot chance of precipitation.
+Tonight it will be Mostly Clear with a low chance of precipitation. 
+
+SIRI> whats the weather like tomorrow? 
+The weather tomorrow in Clinton, NY during the day will be Cloudy with a decent chance of precipitation.
+The weather tomorrow in Clinton, NY at night will be Rain with a decent chance of precipitation. 
+There will be a high of 24C and a lot of 13C.
+
+SIRI> whats the weather in Chicago, IL?
+Did you mean, Chicago, IL? yes
+It's currently Cloudy in Chicago, IL with a temperature of 16C. Do you want to see the forecast for today? no
+
+SIRI> whats the weather on may 16? 
+The weather on May 16 in Clinton, NY during the day will be Scattered T-Storms with a decent chance of precipitation.
+The weather on May 16 in Clinton, NY at night will be Partly Cloudy with a decent chance of precipitation. 
+There will be a high of 25C and a low of 13C. 
+
+SIRI? whats the weather on 5/16 
+The weather on May 16 in Clinton, NY during the day will be Scattered T-Storms with a decent chance of precipitation.
+The weather on May 16 in Clinton, NY at night will be Partly Cloudy with a decent chance of precipitation. 
+There will be a high of 25C and a low of 13C. 
+
+################################################################################
+In general, and combinations of these will work.
+
+
+// you guys put your stuff here
+
+
+
+
+To run our Siri for yourself and see, simply run
+
+    clisp -i start
+
+in the shell.
+
+Thanks! 
+-Zach, Casey, and Adam
